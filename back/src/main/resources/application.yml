@@ -1,0 +1,22 @@
+server:
+  port : 8081
+
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://34.64.74.7:5432/testee
+    username: postgres
+    password: 55710930
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    open-in-view: false
+    show-sql: true
+    hibernate:
+      format_sql: true
+      ddl-auto: update
+
+security:
+  jwt:
+    token:
+      secret-key: secretsecretsecretsecretsecret
+      expire-length: 3600000 #1시간
