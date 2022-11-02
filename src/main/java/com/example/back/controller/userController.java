@@ -25,6 +25,7 @@ public class userController {
             jsonReponse.setMsg("It is Check to communicate");
             log.info("Is Anybody there???????????????????");
 
+            
             log.info(signDto.getUserId()+"!!!!!!!!!!!!!!!!!!!!!");
             log.info(signDto.getPassword()+"!!!!!!!!!!!!!!!!!!!!!");
             log.info(signDto.getPhoneNum()+"!!!!!!!!!!!!!!!!!!!!!");
