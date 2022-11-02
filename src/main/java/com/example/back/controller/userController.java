@@ -16,7 +16,7 @@ public class userController {
     private final UserService userService;
 
     @PostMapping("/user/signup")
-    public void execSignup(@Validated @RequestBody signDto signDto) {
+    public String execSignup(@Validated @RequestBody signDto signDto) {
 //        try {
             userService.joinUser(signDto);
 //        } catch(IllegalStateException e){
@@ -24,7 +24,7 @@ public class userController {
 //            model.addAttribute("errMsg",errMsg);
 //            return "/ShowErr";
 //        }
-        //일단 test용이라서 void로 진행한다.
+        return "It is Check to communicate";
     }
 
 
