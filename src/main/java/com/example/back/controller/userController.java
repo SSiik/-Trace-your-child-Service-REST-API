@@ -2,29 +2,35 @@ package com.example.back.controller;
 
 import com.example.back.Domain.Dto.LoginRequest;
 import com.example.back.Domain.Dto.ResponseDto;
+import com.example.back.Domain.Dto.jsonResponse;
 import com.example.back.Domain.Dto.signDto;
 import com.example.back.service.UserService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
+@Slf4j
 public class userController {
 
     private final UserService userService;
 
     @PostMapping("/user/signup")
-    public String execSignup(@Validated @RequestBody signDto signDto) {
+    public jsonResponse execSignup(@Validated @RequestBody signDto signDto) {
 //        try {
+            jsonResponse jsonReponse = new jsonResponse();
+            jsonReponse.setMsg("It is Check to communicate");
+            log.info("Is Anybody there???????????????????");
             userService.joinUser(signDto);
 //        } catch(IllegalStateException e){
 //            String errMsg = e.getMessage();
 //            model.addAttribute("errMsg",errMsg);
 //            return "/ShowErr";
 //        }
-        return "It is Check to communicate";
+        return jsonReponse;
     }
 
 
