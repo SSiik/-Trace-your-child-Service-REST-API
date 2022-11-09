@@ -27,7 +27,7 @@ public class UserService {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         signDto.setPassword(passwordEncoder.encode(signDto.getPassword()));
         user user = signDto.toEntity();
-        if(signDto.isIdx() != false){ //이러면 자녀 회원가입, 따로 user에 셋팅을 해준다.
+        if(signDto.isIdx() == false){ //이러면 자녀 회원가입, 따로 user에 셋팅을 해준다.
             user parentUser = userRepository.findByPhoneNum(signDto.getParentPhoneNum());
             user.setParent(parentUser);
             parentUser.getChildren().add(user);
