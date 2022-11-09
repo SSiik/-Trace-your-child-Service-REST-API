@@ -92,7 +92,8 @@ public class UserService {
             user user = byPhoneNumWithParent.get();
             childrenDto dto = new childrenDto();
             dto.setPhoneNum(user.getParent().getPhoneNum());
-            dto.setLocation(childrenDto.getLocation());
+            dto.setLatitude(childrenDto.getLatitude());
+            dto.setLongitude(childrenDto.getLongitude());
             return dto;
         }
         else{
