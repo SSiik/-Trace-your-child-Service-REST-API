@@ -23,10 +23,10 @@ public class signDto {
     public user toEntity(){
         user user = new user();
         user.setUserId(userId);
+        user.setUserName(userName);
         user.setPassword(password);
         user.setPhoneNum(phoneNum);
         user.setIdx(idx);
-        user.setHouse(house);
         return user;
     }
 
