@@ -27,7 +27,7 @@ public class UserService {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         signDto.setPassword(passwordEncoder.encode(signDto.getPassword()));
         user user = signDto.toEntity();
-        if(signDto.getParentPhoneNum() != null){ //이러면 자녀 회원가입, 따로 user에 셋팅을 해준다.
+        if(signDto.isIdx() != false){ //이러면 자녀 회원가입, 따로 user에 셋팅을 해준다.
             user parentUser = userRepository.findByPhoneNum(signDto.getParentPhoneNum());
             user.setParent(parentUser);
             parentUser.getChildren().add(user);
@@ -51,20 +51,28 @@ public class UserService {
                 if(user.isIdx()){ //이게 true면 부모.
                     responseDto.setStatus(200);
                     responseDto.setToken(token);
+                    responseDto.setIdx(user.isIdx()); responseDto.setUserName(user.getUserName());
+                    responseDto.setUserId(user.getUserId());
                     List<user> children = user.getChildren();
                     for (user child : children) {
                         locationDto locationDto = new locationDto();
-                        locationDto.setUserId(child.getUserId()); locationDto.setHouse(child.getHouse()); locationDto.setSchool(child.getSchool());
-                        responseDto.getLocation().add(locationDto);
+                        locationDto.setUserId(child.getUserId()); locationDto.setUserName(child.getUserName());
+                        locationDto.setHouse(child.getHouse()); locationDto.setIdx(child.isIdx());
+                        locationDto.setSchool(child.getSchool()); locationDto.setDuration(child.getDuration());
+                        responseDto.getChildrenInfo().add(locationDto);
                     }
                     return responseDto;
                 }
                 else{
-                    locationDto locationDto = new locationDto();
-                    locationDto.setUserId(user.getUserId()); locationDto.setHouse(user.getHouse()); locationDto.setSchool(user.getSchool());
+                    childrenLoginDto childrenLoginDto = new childrenLoginDto();
                     responseDto.setStatus(200);
                     responseDto.setToken(token);
-                    responseDto.getLocation().add(locationDto);
+                    responseDto.setUserName(user.getUserName());  responseDto.setUserId(user.getUserId());
+                    responseDto.setIdx(user.isIdx());
+                    childrenLoginDto.setHouse(user.getHouse());
+                    childrenLoginDto.setSchool(user.getSchool());
+                    childrenLoginDto.setDuration(user.getDuration());
+                    responseDto.setMyLocation(childrenLoginDto);
                     return responseDto;
                 }
             }

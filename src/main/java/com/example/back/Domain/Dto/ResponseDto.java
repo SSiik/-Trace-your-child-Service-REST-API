@@ -11,7 +11,11 @@ public class ResponseDto {
     String header = "Authorization";
     String startsWith = "Bearer";
     String token;
-    List<locationDto> location = new ArrayList<>();
+    String userName;
+    String userId;
+    boolean idx;
+    childrenLoginDto myLocation;
+    List<locationDto> childrenInfo = new ArrayList<>();
 
 
 }
