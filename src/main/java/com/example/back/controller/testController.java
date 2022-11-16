@@ -2,6 +2,7 @@ package com.example.back.controller;
 
 import com.example.back.Domain.Dto.LoginRequest;
 import com.example.back.Domain.Dto.ResponseDto;
+import com.example.back.Domain.Dto.oneDto;
 import com.example.back.Domain.Dto.testDto;
 import com.example.back.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -29,9 +30,9 @@ public class testController {
     }
 
     @PostMapping("/test/loc2")
-    public List<String> testLoc2(@RequestBody List<String> list) {
-        for (String s : list) {
-            log.info(s+"!!!!!!!!!!!!!!!!!!!1");
+    public List<oneDto> testLoc2(@RequestBody List<oneDto> list) {
+        for (oneDto oneDto : list) {
+            log.info("test2"+oneDto.getLatitude()+"!!!!!!!!!!!!!!!!!!!!!!!");
         }
         return list;
         // 넘어온 String형태의 위도 경도를 그대로 반환한다.
