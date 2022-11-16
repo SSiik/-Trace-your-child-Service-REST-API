@@ -19,4 +19,4 @@ security:
   jwt:
     token:
       secret-key: secretsecretsecretsecretsecret
-      expire-length: 3600000 #1시간
+      expire-length: 3600000 #1시간 , 단위가 ms
