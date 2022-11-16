@@ -32,6 +32,7 @@ public class testController {
         List<oneDto> list = d.getList();
         for (oneDto oneDto : list) {
             log.info("test2"+oneDto.getLatitude()+"!!!!!!!!!!!!!!!!!!!!!!!");
+            log.info("test3"+oneDto.getLongitude()+"!!!!!!!!!!!!!!!!!!!!");
         }
         return list;
         // 넘어온 String형태의 위도 경도를 그대로 반환한다.
