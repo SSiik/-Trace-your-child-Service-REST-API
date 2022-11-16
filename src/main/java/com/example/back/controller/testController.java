@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -28,10 +29,9 @@ public class testController {
     }
 
     @PostMapping("/test/loc2")
-    public List<testDto> testLoc2(@RequestBody List<testDto> list) {
-        for(testDto t : list){
-            log.info(t.getLongitude()+"!!!!!!!!!!!!!!!!!!!!!!!1");
-            log.info(t.getLatitude()+"!!!!!!!!!!!!!!!!!!!!!");
+    public List<String> testLoc2(@RequestBody List<String> list) {
+        for (String s : list) {
+            log.info(s+"!!!!!!!!!!!!!!!!!!!1");
         }
         return list;
         // 넘어온 String형태의 위도 경도를 그대로 반환한다.
