@@ -18,14 +18,21 @@ import java.util.List;
 public class testController {
     private final UserService userService;
 
+
     @PostMapping("/test/loc")
     public testDto testLoc(@RequestBody testDto dto) {
+        log.info(dto.getLatitude()+"!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        log.info(dto.getLongitude()+"!!!!!!!!!!!!!!!!!!!!!");
         return dto;
         // 넘어온 String형태의 위도 경도를 그대로 반환한다.
     }
 
     @PostMapping("/test/loc2")
     public List<testDto> testLoc2(@RequestBody List<testDto> list) {
+        for(testDto t : list){
+            log.info(t.getLongitude()+"!!!!!!!!!!!!!!!!!!!!!!!1");
+            log.info(t.getLatitude()+"!!!!!!!!!!!!!!!!!!!!!");
+        }
         return list;
         // 넘어온 String형태의 위도 경도를 그대로 반환한다.
     }
