@@ -58,13 +58,13 @@ public class userController {
     }
 
     @PostMapping("/user/login/child")
-    public void gpsLoc(@RequestBody childReq childReq) {
+    public locInfo gpsLoc(@RequestBody childReq childReq) {
         log.info("test2"+childReq.getUserId()+"!!!!!!!!!!!!!!!!!!!!!!!");
         log.info("test2"+childReq.getLatitude()+"!!!!!!!!!!!!!!!!!!!!!!!");
         log.info("test2"+childReq.getLongitude()+"!!!!!!!!!!!!!!!!!!!!!!!");
         if(childReq.isIdx()) throw new RuntimeException("It is allow to child");
-        userService.putCache(childReq);
-
+        locInfo locInfo = userService.putCache(childReq);
+        return locInfo;
     }
 
     @PostMapping("/user/login/parent")
