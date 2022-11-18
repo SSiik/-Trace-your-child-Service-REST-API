@@ -24,7 +24,7 @@ public class crosswalkJDbcRepository {
     }
 
     public List<cross> selectCross(){
-        String SQL = "select link_wkt from cross";
+        String SQL = "SELECT link_wkt FROM public.\"cross\"";
         List<cross> results = jdbcTemplate.query(SQL,new crossMapper());
         return results;
     }
