@@ -2,11 +2,18 @@ package com.example.back.service;
 
 
 import com.example.back.Domain.Dto.*;
+import com.example.back.Domain.Dto.crosswalkk.cross;
+import com.example.back.Domain.Dto.gps.childReq;
+import com.example.back.Domain.Dto.gps.locInfo;
+import com.example.back.Domain.Dto.gps.parReq;
 import com.example.back.Domain.Entity.user;
 import com.example.back.JwtTokenProvider;
+import com.example.back.repository.crosswalkJDbcRepository;
 import com.example.back.repository.userRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,6 +27,7 @@ import java.util.Optional;
 public class UserService {
     private final JwtTokenProvider jwtTokenProvider;
     private final userRepository userRepository;
+    private final crosswalkJDbcRepository crosswalkJDbcRepository;
 
     @Transactional
     public void joinUser(signDto signDto) {  //회원가입
@@ -101,7 +109,25 @@ public class UserService {
         }
     }
 
+    public List<cross> reqForCross(){
+        List<cross> crosses = crosswalkJDbcRepository.selectCross();
+        return crosses;
+    }
+
+    @Cacheable(value = "userLoc", key = "#parReq.userId")
+    public locInfo getCache(parReq parReq) {
+        log.info("There is no children location!!!!!!!!!!!!!!!!!!!!!");
+        locInfo locInfo = new locInfo();
+        locInfo.setLongitude(null); locInfo.setLongitude(null);
+        return locInfo;
+    }
 
 
-
+    @CachePut(value = "userLoc", key = "#childReq.userId")
+    public locInfo putCache(childReq childReq) {
+        locInfo locInfo = new locInfo();
+        locInfo.setLatitude(childReq.getLatitude());
+        locInfo.setLongitude(childReq.getLongitude());
+        return locInfo;
+    }
 }
