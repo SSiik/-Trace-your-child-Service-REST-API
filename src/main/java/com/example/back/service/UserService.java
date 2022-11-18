@@ -130,4 +130,8 @@ public class UserService {
         locInfo.setLongitude(childReq.getLongitude());
         return locInfo;
     }
+
+    public boolean checkUserIdDuplicate(String userId) {
+        return userRepository.existsByUserId(userId);
+    }
 }

@@ -10,6 +10,7 @@ import com.example.back.Domain.Dto.gps.parReq;
 import com.example.back.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,12 +33,17 @@ public class userController {
             return jsonReponse;
     }
 
-
     @PostMapping("/user/login")
     public ResponseDto login(@RequestBody LoginRequest loginRequest) {
         ResponseDto responseDto = userService.loginChk(loginRequest.getUserId(), loginRequest.getPassword());
         return responseDto;
         // 로그인 상태유지와 더불어서 token으로 이제 API를 사용할수가 있습니다.
+    }
+
+
+    @GetMapping("/user-nicknames/{userId}/exists")
+    public ResponseEntity<Boolean> checkNicknameDuplicate(@PathVariable String userId){
+        return ResponseEntity.ok(userService.checkUserIdDuplicate(userId));
     }
 
     @PostMapping("/user/child")
@@ -63,7 +69,10 @@ public class userController {
         log.info("test2"+childReq.getLatitude()+"!!!!!!!!!!!!!!!!!!!!!!!");
         log.info("test2"+childReq.getLongitude()+"!!!!!!!!!!!!!!!!!!!!!!!");
         if(childReq.isIdx()) throw new RuntimeException("It is allow to child");
-        locInfo locInfo = userService.putCache(childReq);
+        locInfo locInfo = new locInfo();
+        if(childReq.getLongitude() != null && childReq.getLatitude() != null){
+            locInfo = userService.putCache(childReq);
+        }
         return locInfo;
     }
 
