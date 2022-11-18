@@ -53,9 +53,9 @@ public class userController {
     }
 
     @GetMapping("/user/login/cross")
-    public respCross testLoc3(@RequestBody childCross childCross) {
-        log.info("test2"+childCross.isIdx()+"!!!!!!!!!!!!!!!!!!!!!!!");
-        if(childCross.isIdx()) throw new RuntimeException("It is allow to child");
+    public respCross testLoc3(@RequestParam boolean idx) {
+        log.info("test2"+idx+"!!!!!!!!!!!!!!!!!!!!!!!");
+        if(idx) throw new RuntimeException("It is allow to child");
         List<cross> crosses = userService.reqForCross();
         respCross respCross = new respCross();
         respCross.setCrosses(crosses);

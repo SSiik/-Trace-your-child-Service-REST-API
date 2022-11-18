@@ -7,3 +7,4 @@ public class parReq {
     String userId;
     boolean idx;
 }
+
