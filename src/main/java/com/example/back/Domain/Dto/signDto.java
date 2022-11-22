@@ -14,8 +14,10 @@ public class signDto {
     private String phoneNum;
     @Nullable private String parentPhoneNum;
     private boolean idx;
-    @Nullable private String house;
-    @Nullable private String school;
+    @Nullable private String houselat;
+    @Nullable private String houselng;
+    @Nullable private String schoollat;
+    @Nullable private String schoollng;
     @Nullable private int duration;
 
     public user toEntity(){

@@ -18,13 +18,20 @@ public class crosswalkJDbcRepository {
     class crossMapper implements RowMapper<cross>{
         public cross mapRow(ResultSet rs,int rowNum) throws SQLException {
             cross cross = new cross();
-            cross.setLink_wkt(rs.getString("link_wkt"));
+            cross.setLatitude(rs.getString("latitude"));
+            cross.setLongitude(rs.getString("longitude"));
             return cross;
         }
     }
 
     public List<cross> selectCross(){
-        String SQL = "SELECT link_wkt FROM public.\"cross\"";
+        String SQL = "SELECT latitude,longitude FROM public.\"cross\"";
+        List<cross> results = jdbcTemplate.query(SQL,new crossMapper());
+        return results;
+    }
+
+    public List<cross> selectConditionCross(){
+        String SQL = "SELECT latitude,longitude FROM public.\"cross\" where st_length >= 70";
         List<cross> results = jdbcTemplate.query(SQL,new crossMapper());
         return results;
     }

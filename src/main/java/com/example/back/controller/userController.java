@@ -46,6 +46,11 @@ public class userController {
         return ResponseEntity.ok(userService.checkUserIdDuplicate(userId));
     }
 
+    @GetMapping("/user-phoneNum/{phoneNum}/exists")
+    public ResponseEntity<Boolean> checkPhoneNumDuplicate(@PathVariable String phoneNum){
+        return ResponseEntity.ok(userService.checkPhoneNumDuplicate(phoneNum));
+    }
+
     @PostMapping("/user/child")
     public childrenDto req(@RequestBody childrenDto childrenDto) {
         childrenDto dto1 = userService.childrenRequest(childrenDto);
@@ -53,10 +58,21 @@ public class userController {
     }
 
     @GetMapping("/user/login/cross")
-    public respCross testLoc3(@RequestParam boolean idx) {
+    public respCross testLoc3(@RequestParam boolean idx){
         log.info("test2"+idx+"!!!!!!!!!!!!!!!!!!!!!!!");
         if(idx) throw new RuntimeException("It is allow to child");
         List<cross> crosses = userService.reqForCross();
+        respCross respCross = new respCross();
+        respCross.setCrosses(crosses);
+        return respCross;
+        // 넘어온 String형태의 위도 경도를 그대로 반환한다.
+    }
+
+    @GetMapping("/user/login/cross/cond")
+    public respCross testLoc4(@RequestParam boolean idx){
+        log.info("test2"+idx+"!!!!!!!!!!!!!!!!!!!!!!!");
+        if(idx) throw new RuntimeException("It is allow to child");
+        List<cross> crosses = userService.reqForCrossCond();
         respCross respCross = new respCross();
         respCross.setCrosses(crosses);
         return respCross;

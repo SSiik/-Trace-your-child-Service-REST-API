@@ -1,12 +1,14 @@
 package com.example.back.Domain.Dto;
 
+import com.example.back.Domain.Dto.locDto.house;
+import com.example.back.Domain.Dto.locDto.school;
 import lombok.Data;
 
 @Data
 public class locationDto {
     String userId;
-    String house;
-    String school;
+    house house;
+    school school;
     String userName;
     boolean idx;
     int duration;

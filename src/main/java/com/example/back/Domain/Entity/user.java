@@ -1,5 +1,7 @@
 package com.example.back.Domain.Entity;
 
+import com.example.back.Domain.Dto.locDto.house;
+import com.example.back.Domain.Dto.locDto.school;
 import lombok.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -31,11 +33,11 @@ public class user {
     @Column
     private boolean idx; // idx = true면 부모, false면 자녀.
 
-    @Column
-    private String house;  //집위치
+    @Column @Embedded
+    private house house;
 
-    @Column
-    private String school;  //학교위치
+    @Column @Embedded
+    private school school;
 
     @Column
     private int duration; //등교시간

@@ -6,6 +6,8 @@ import com.example.back.Domain.Dto.crosswalkk.cross;
 import com.example.back.Domain.Dto.gps.childReq;
 import com.example.back.Domain.Dto.gps.locInfo;
 import com.example.back.Domain.Dto.gps.parReq;
+import com.example.back.Domain.Dto.locDto.house;
+import com.example.back.Domain.Dto.locDto.school;
 import com.example.back.Domain.Entity.user;
 import com.example.back.JwtTokenProvider;
 import com.example.back.repository.crosswalkJDbcRepository;
@@ -39,8 +41,10 @@ public class UserService {
             user parentUser = userRepository.findByPhoneNum(signDto.getParentPhoneNum());
             user.setParent(parentUser);
             parentUser.getChildren().add(user);
-            user.setHouse(signDto.getHouse());
-            user.setSchool(signDto.getSchool());
+            house house = new house(signDto.getHouselat(), signDto.getHouselng());
+            user.setHouse(house);
+            school school = new school(signDto.getSchoollat(), signDto.getSchoollng());
+            user.setSchool(school);
             user.setDuration(signDto.getDuration());
         }
         userRepository.save(user);
@@ -114,6 +118,11 @@ public class UserService {
         return crosses;
     }
 
+    public List<cross> reqForCrossCond(){
+        List<cross> crosses = crosswalkJDbcRepository.selectConditionCross();
+        return crosses;
+    }
+
     @Cacheable(value = "userLoc", key = "#parReq.userId")
     public locInfo getCache(parReq parReq) {
         log.info("There is no children location!!!!!!!!!!!!!!!!!!!!!");
@@ -133,5 +142,9 @@ public class UserService {
 
     public boolean checkUserIdDuplicate(String userId) {
         return userRepository.existsByUserId(userId);
+    }
+
+    public boolean checkPhoneNumDuplicate(String phoneNum) {
+        return userRepository.existsByPhoneNum(phoneNum);
     }
 }
