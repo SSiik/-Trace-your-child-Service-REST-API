@@ -18,7 +18,7 @@ public class user {
     @GeneratedValue( strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(length = 30, nullable = false)
+    @Column(length = 30, nullable = false, unique = true)
     private String userId; //닉네임
 
     @Column(length = 30, nullable = false)
@@ -27,7 +27,7 @@ public class user {
     @Column(length = 100, nullable = false)
     private String password;
 
-    @Column
+    @Column(unique = true)
     private String phoneNum; //parentPhoneNum은 필요가없다.
 
     @Column

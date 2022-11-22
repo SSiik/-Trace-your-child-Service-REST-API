@@ -13,4 +13,7 @@ public class house {
         this.houselat = houselat;
         this.houselng = houselng;
     }
+
+    public house() {
+    }
 }

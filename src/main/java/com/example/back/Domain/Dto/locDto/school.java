@@ -13,4 +13,7 @@ public class school {
         this.schoollat = schoollat;
         this.schoollng = schoollng;
     }
+
+    public school() {
+    }
 }
