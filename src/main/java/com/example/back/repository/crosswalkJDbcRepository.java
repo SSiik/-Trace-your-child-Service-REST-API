@@ -31,7 +31,7 @@ public class crosswalkJDbcRepository {
     }
 
     public List<cross> selectConditionCross(){
-        String SQL = "SELECT latitude,longitude FROM public.\"cross\" where st_length >= 70";
+        String SQL = "SELECT latitude,longitude FROM public.\"cross\" where \"cross.st_length_\" >= 70";
         List<cross> results = jdbcTemplate.query(SQL,new crossMapper());
         return results;
     }
