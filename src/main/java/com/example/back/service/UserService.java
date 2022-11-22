@@ -41,10 +41,8 @@ public class UserService {
             user parentUser = userRepository.findByPhoneNum(signDto.getParentPhoneNum());
             user.setParent(parentUser);
             parentUser.getChildren().add(user);
-            house house = new house(signDto.getHouselat(), signDto.getHouselng());
-            user.setHouse(house);
-            school school = new school(signDto.getSchoollat(), signDto.getSchoollng());
-            user.setSchool(school);
+            user.setHouselat(signDto.getHouselat()); user.setHouselng(signDto.getHouselng());
+            user.setSchoollat(signDto.getSchoollat()); user.setSchoollng(signDto.getSchoollng());
             user.setDuration(signDto.getDuration());
         }
         userRepository.save(user);
@@ -69,8 +67,10 @@ public class UserService {
                     for (user child : children) {
                         locationDto locationDto = new locationDto();
                         locationDto.setUserId(child.getUserId()); locationDto.setUserName(child.getUserName());
-                        locationDto.setHouse(child.getHouse()); locationDto.setIdx(child.isIdx());
-                        locationDto.setSchool(child.getSchool()); locationDto.setDuration(child.getDuration());
+                        locationDto.setHouselat(child.getHouselat()); locationDto.setHouselng(child.getHouselng());
+                        locationDto.setSchoollat(child.getSchoollat()); locationDto.setSchoollng(child.getSchoollng());
+                        locationDto.setIdx(child.isIdx());
+                        locationDto.setDuration(child.getDuration());
                         responseDto.getChildrenInfo().add(locationDto);
                     }
                     return responseDto;
@@ -81,8 +81,10 @@ public class UserService {
                     responseDto.setToken(token);
                     responseDto.setUserName(user.getUserName());  responseDto.setUserId(user.getUserId());
                     responseDto.setIdx(user.isIdx());
-                    childrenLoginDto.setHouse(user.getHouse());
-                    childrenLoginDto.setSchool(user.getSchool());
+                    childrenLoginDto.setHouselat(user.getHouselat());
+                    childrenLoginDto.setHouselng(user.getHouselng());
+                    childrenLoginDto.setSchoollat(user.getSchoollat());
+                    childrenLoginDto.setSchoollng(user.getSchoollng());
                     childrenLoginDto.setDuration(user.getDuration());
                     responseDto.setMyLocation(childrenLoginDto);
                     return responseDto;

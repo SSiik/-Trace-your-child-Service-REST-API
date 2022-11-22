@@ -6,7 +6,9 @@ import lombok.Data;
 
 @Data
 public class childrenLoginDto {
-    house house;
-    school school;
+    String houselat;
+    String houselng;
+    String schoollat;
+    String schoollng;
     int duration;
 }

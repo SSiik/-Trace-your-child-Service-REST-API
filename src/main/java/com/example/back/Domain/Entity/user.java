@@ -33,11 +33,17 @@ public class user {
     @Column
     private boolean idx; // idx = true면 부모, false면 자녀.
 
-    @Column @Embedded
-    private house house;
+    @Column
+    private String houselat;
 
-    @Column @Embedded
-    private school school;
+    @Column
+    private String houselng;
+
+    @Column
+    private String schoollat;
+
+    @Column
+    private String schoollng;
 
     @Column
     private int duration; //등교시간

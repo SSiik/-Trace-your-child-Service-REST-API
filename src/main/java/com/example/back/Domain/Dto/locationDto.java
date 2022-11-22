@@ -7,8 +7,10 @@ import lombok.Data;
 @Data
 public class locationDto {
     String userId;
-    house house;
-    school school;
+    String houselat;
+    String houselng;
+    String schoollat;
+    String schoollng;
     String userName;
     boolean idx;
     int duration;
