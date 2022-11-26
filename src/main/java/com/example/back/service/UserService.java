@@ -146,7 +146,7 @@ public class UserService {
         return locInfo;
     }
 
-    @CachePut(value = "userAlarm", key = "#parReq.userId")
+    @CachePut(value = "userAlarm", key = "#childAlarmReq.userId")
     public String putCache2(childAlarmReq childAlarmReq) {
         return "ok";
     }
