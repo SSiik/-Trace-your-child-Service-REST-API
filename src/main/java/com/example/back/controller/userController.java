@@ -109,12 +109,11 @@ public class userController {
     }
 
     @PostMapping("/user/login/alarm")  //자녀앱 api
-    public retDto alarmAPI1(@RequestBody childAlarmReq childAlarmReq) {
+    public childAlarmReq alarmAPI1(@RequestBody childAlarmReq childAlarmReq) {
         log.info("test2"+childAlarmReq.getUserId()+"!!!!!!!!!!!!!!!!!!!!!!!");
         if(childAlarmReq.isIdx()) throw new RuntimeException("It is allow to child");
-        retDto retDto = new retDto();
-        retDto.setMsg(userService.putCache2(childAlarmReq));
-        return retDto;
+        childAlarmReq childAlarmReq1 = userService.putCache2(childAlarmReq);
+        return childAlarmReq1;
     }
 
     @PostMapping("/user/login/alarmRec")  //부모앱 api

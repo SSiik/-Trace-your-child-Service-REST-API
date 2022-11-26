@@ -157,8 +157,8 @@ public class UserService {
     }
 
     @CachePut(value = "userAlarm", key = "#childAlarmReq.userId")
-    public String putCache2(childAlarmReq childAlarmReq) {
-        return "ok";
+    public childAlarmReq putCache2(childAlarmReq childAlarmReq) {
+        return childAlarmReq;
     }
 
 
