@@ -146,11 +146,6 @@ public class UserService {
         return locInfo;
     }
 
-    @CachePut(value = "userAlarm", key = "#childAlarmReq.userId")
-    public String putCache2(childAlarmReq childAlarmReq) {
-        return "ok";
-    }
-
     @Cacheable(value = "userAlarm", key = "#parReq.userId")
     public childAlarmReq getCache2(parReq parReq) {
         log.info("There is no children Alarm!!!!!!!!!!!!!!!!!!!!!");
@@ -160,6 +155,12 @@ public class UserService {
         childAlarmReq.setWhere(null); childAlarmReq.setIdx(false);
         return childAlarmReq;
     }
+
+    @CachePut(value = "userAlarm", key = "#childAlarmReq.userId")
+    public String putCache2(childAlarmReq childAlarmReq) {
+        return "ok";
+    }
+
 
     @CacheEvict(value = "userAlarm",key="#parReq.userId")
     public void deleteCache(parReq parReq) { //userId 기반으로 삭제.
