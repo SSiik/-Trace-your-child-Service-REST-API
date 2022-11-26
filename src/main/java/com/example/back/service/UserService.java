@@ -155,6 +155,9 @@ public class UserService {
     public childAlarmReq getCache2(parReq parReq) {
         log.info("There is no children Alarm!!!!!!!!!!!!!!!!!!!!!");
         childAlarmReq childAlarmReq = new childAlarmReq();
+        childAlarmReq.setAlarm(null); childAlarmReq.setUserId(null);
+        childAlarmReq.setLat(null); childAlarmReq.setLng(null);
+        childAlarmReq.setWhere(null); childAlarmReq.setIdx(false);
         return childAlarmReq;
     }
 
