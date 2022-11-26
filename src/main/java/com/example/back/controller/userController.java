@@ -1,6 +1,8 @@
 package com.example.back.controller;
 
 import com.example.back.Domain.Dto.*;
+import com.example.back.Domain.Dto.alarm.childAlarmReq;
+import com.example.back.Domain.Dto.alarm.retDto;
 import com.example.back.Domain.Dto.crosswalkk.childCross;
 import com.example.back.Domain.Dto.crosswalkk.cross;
 import com.example.back.Domain.Dto.crosswalkk.respCross;
@@ -38,6 +40,11 @@ public class userController {
         ResponseDto responseDto = userService.loginChk(loginRequest.getUserId(), loginRequest.getPassword());
         return responseDto;
         // 로그인 상태유지와 더불어서 token으로 이제 API를 사용할수가 있습니다.
+    }
+
+    @PostMapping("/user/login/update")
+    public void updateInfo(@Validated @RequestBody signDto signDto){
+        userService.updatedInfo(signDto);
     }
 
 
@@ -95,10 +102,30 @@ public class userController {
     @PostMapping("/user/login/parent")
     public locInfo gpsLoc2(@RequestBody parReq parReq) {
         log.info("test2"+parReq.getUserId()+"!!!!!!!!!!!!!!!!!!!!!!!");
-        log.info("test2"+parReq.getUserId()+"!!!!!!!!!!!!!!!!!!!!!!!");
         if(!parReq.isIdx()) throw new RuntimeException("It is allow to parent");
         locInfo locInfo = userService.getCache(parReq);
         return locInfo;
+        // 넘어온 String형태의 위도 경도를 그대로 반환한다.
+    }
+
+    @PostMapping("/user/login/alarm")  //자녀앱 api
+    public retDto alarmAPI1(@RequestBody childAlarmReq childAlarmReq) {
+        log.info("test2"+childAlarmReq.getUserId()+"!!!!!!!!!!!!!!!!!!!!!!!");
+        if(childAlarmReq.isIdx()) throw new RuntimeException("It is allow to child");
+        retDto retDto = new retDto();
+        retDto.setMsg(userService.putCache2(childAlarmReq));
+        return retDto;
+    }
+
+    @PostMapping("/user/login/alarmRec")  //부모앱 api
+    public childAlarmReq alarmAPI2(@RequestBody parReq parReq) {
+        log.info("test2"+parReq.getUserId()+"!!!!!!!!!!!!!!!!!!!!!!!");
+        if(!parReq.isIdx()) throw new RuntimeException("It is allow to parent");
+        childAlarmReq cache2 = userService.getCache2(parReq);
+        if(cache2.getUserId() != null){ //삭제도해야함.
+            userService.deleteCache(parReq);
+        }
+        return cache2;
         // 넘어온 String형태의 위도 경도를 그대로 반환한다.
     }
 

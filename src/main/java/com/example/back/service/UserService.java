@@ -2,6 +2,7 @@ package com.example.back.service;
 
 
 import com.example.back.Domain.Dto.*;
+import com.example.back.Domain.Dto.alarm.childAlarmReq;
 import com.example.back.Domain.Dto.crosswalkk.cross;
 import com.example.back.Domain.Dto.gps.childReq;
 import com.example.back.Domain.Dto.gps.locInfo;
@@ -14,6 +15,7 @@ import com.example.back.repository.crosswalkJDbcRepository;
 import com.example.back.repository.userRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -100,6 +102,8 @@ public class UserService {
     }
 
 
+
+
     public childrenDto childrenRequest(childrenDto childrenDto) {
         Optional<user> byPhoneNumWithParent = userRepository.findByPhoneNumWithParent(childrenDto.getPhoneNum());
         if(byPhoneNumWithParent.isPresent()){
@@ -142,6 +146,38 @@ public class UserService {
         return locInfo;
     }
 
+    @CachePut(value = "userAlarm", key = "#parReq.userId")
+    public String putCache2(childAlarmReq childAlarmReq) {
+        return "ok";
+    }
+
+    @Cacheable(value = "userAlarm", key = "#parReq.userId")
+    public childAlarmReq getCache2(parReq parReq) {
+        log.info("There is no children Alarm!!!!!!!!!!!!!!!!!!!!!");
+        childAlarmReq childAlarmReq = new childAlarmReq();
+        return childAlarmReq;
+    }
+
+    @CacheEvict(value = "userAlarm",key="#parReq.userId")
+    public void deleteCache(parReq parReq) { //userId 기반으로 삭제.
+
+    }
+
+    @Transactional
+    public void updatedInfo(signDto signDto) {
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        signDto.setPassword(passwordEncoder.encode(signDto.getPassword()));
+        Optional<user> byUserId = userRepository.findByUserId(signDto.getUserId());
+        if(byUserId.isEmpty()) throw new RuntimeException("There is not member to change");
+        user user = byUserId.get();
+        user.setPassword(signDto.getPassword());
+        user.setSchoollng(signDto.getSchoollng());
+        user.setSchoollat(signDto.getSchoollat());
+        user.setHouselng(signDto.getHouselng());
+        user.setHouselat(signDto.getHouselat());
+        user.setDuration(signDto.getDuration());
+    }
+
     public boolean checkUserIdDuplicate(String userId) {
         return userRepository.existsByUserId(userId);
     }
@@ -149,4 +185,6 @@ public class UserService {
     public boolean checkPhoneNumDuplicate(String phoneNum) {
         return userRepository.existsByPhoneNum(phoneNum);
     }
+
+
 }
