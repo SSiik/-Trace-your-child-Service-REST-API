@@ -65,13 +65,14 @@ public class UserService {
                     responseDto.setToken(token);
                     responseDto.setIdx(user.isIdx()); responseDto.setUserName(user.getUserName());
                     responseDto.setUserId(user.getUserId());
+                    responseDto.setPhoneNum(user.getPhoneNum());
                     List<user> children = user.getChildren();
                     for (user child : children) {
                         locationDto locationDto = new locationDto();
                         locationDto.setUserId(child.getUserId()); locationDto.setUserName(child.getUserName());
                         locationDto.setHouselat(child.getHouselat()); locationDto.setHouselng(child.getHouselng());
                         locationDto.setSchoollat(child.getSchoollat()); locationDto.setSchoollng(child.getSchoollng());
-                        locationDto.setIdx(child.isIdx());
+                        locationDto.setIdx(child.isIdx()); locationDto.setPhoneNum(child.getPhoneNum());
                         locationDto.setDuration(child.getDuration());
                         responseDto.getChildrenInfo().add(locationDto);
                     }
@@ -88,6 +89,7 @@ public class UserService {
                     childrenLoginDto.setSchoollat(user.getSchoollat());
                     childrenLoginDto.setSchoollng(user.getSchoollng());
                     childrenLoginDto.setDuration(user.getDuration());
+                    responseDto.setPhoneNum(user.getPhoneNum());
                     responseDto.setMyLocation(childrenLoginDto);
                     return responseDto;
                 }

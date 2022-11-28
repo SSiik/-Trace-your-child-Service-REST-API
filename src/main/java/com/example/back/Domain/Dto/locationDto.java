@@ -12,6 +12,7 @@ public class locationDto {
     String schoollat;
     String schoollng;
     String userName;
+    String phoneNum;
     boolean idx;
     int duration;
 }

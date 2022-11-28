@@ -13,6 +13,7 @@ public class ResponseDto {
     String token;
     String userName;
     String userId;
+    String phoneNum;
     boolean idx;
     childrenLoginDto myLocation;
     List<locationDto> childrenInfo = new ArrayList<>();
