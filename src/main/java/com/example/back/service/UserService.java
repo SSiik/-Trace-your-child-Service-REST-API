@@ -84,6 +84,7 @@ public class UserService {
                     responseDto.setToken(token);
                     responseDto.setUserName(user.getUserName());  responseDto.setUserId(user.getUserId());
                     responseDto.setIdx(user.isIdx());
+                    childrenLoginDto.setParentPhoneNum(user.getParent().getPhoneNum()); //여기서 쿼리발생.
                     childrenLoginDto.setHouselat(user.getHouselat());
                     childrenLoginDto.setHouselng(user.getHouselng());
                     childrenLoginDto.setSchoollat(user.getSchoollat());
