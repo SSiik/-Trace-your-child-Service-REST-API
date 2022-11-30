@@ -199,8 +199,7 @@ public class UserService {
         Optional<user> byUserId = userRepository.findByUserId(userId);
         if(byUserId.isPresent()){
             user user = byUserId.get();
-            String password1 = user.getPassword();
-            if(passwordEncoder.matches(password1,password)){
+            if(passwordEncoder.matches(password,user.getPassword())){
                 return true;
             }
             else{
