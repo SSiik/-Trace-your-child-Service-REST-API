@@ -77,7 +77,7 @@ public class userController {
         return dto1;
     }
 
-    @GetMapping("/user/login/cross")
+    @PostMapping("/user/login/cross")
     public respCross testLoc3(@RequestParam boolean idx){
         log.info("test2"+idx+"!!!!!!!!!!!!!!!!!!!!!!!");
         if(idx) throw new RuntimeException("It is allow to child");
@@ -88,7 +88,7 @@ public class userController {
         // 넘어온 String형태의 위도 경도를 그대로 반환한다.
     }
 
-    @GetMapping("/user/login/cross/cond")
+    @PostMapping("/user/login/cross/cond")
     public respCross testLoc4(@RequestParam boolean idx){
         log.info("test2"+idx+"!!!!!!!!!!!!!!!!!!!!!!!");
         if(idx) throw new RuntimeException("It is allow to child");
