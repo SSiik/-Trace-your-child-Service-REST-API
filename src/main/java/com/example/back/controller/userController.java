@@ -35,10 +35,18 @@ public class userController {
             return jsonReponse;
     }
 
-    @PostMapping("/user/login")
+    @PostMapping("/user/lgin")
     public ResponseDto login(@RequestBody LoginRequest loginRequest) {
         ResponseDto responseDto = userService.loginChk(loginRequest.getUserId(), loginRequest.getPassword());
         return responseDto;
+        // 로그인 상태유지와 더불어서 token으로 이제 API를 사용할수가 있습니다.
+    }
+
+    @PostMapping("/user/login/logout")
+    public msgDto logout() {
+        msgDto msgDto = new msgDto();
+        msgDto.setMsg("expired");
+        return msgDto;
         // 로그인 상태유지와 더불어서 token으로 이제 API를 사용할수가 있습니다.
     }
 
