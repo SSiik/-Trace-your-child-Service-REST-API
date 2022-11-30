@@ -194,4 +194,21 @@ public class UserService {
     }
 
 
+    public boolean passwordChk(String userId, String password) {
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        Optional<user> byUserId = userRepository.findByUserId(userId);
+        if(byUserId.isPresent()){
+            user user = byUserId.get();
+            String password1 = user.getPassword();
+            if(passwordEncoder.matches(password1,password)){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        else{
+            throw new RuntimeException("There is not valid UserId");
+        }
+    }
 }

@@ -42,6 +42,11 @@ public class userController {
         // 로그인 상태유지와 더불어서 token으로 이제 API를 사용할수가 있습니다.
     }
 
+    @PostMapping("/user/login/chk")
+    public ResponseEntity<Boolean> PassCheck(@RequestBody LoginRequest loginRequest) {
+        return ResponseEntity.ok(userService.passwordChk(loginRequest.getUserId(), loginRequest.getPassword()));
+    }
+
     @PostMapping("/user/login/update")
     public void updateInfo(@Validated @RequestBody signDto signDto){
         userService.updatedInfo(signDto);
