@@ -3,6 +3,7 @@ package com.example.back.controller;
 import com.example.back.Domain.Dto.*;
 import com.example.back.Domain.Dto.alarm.childAlarmReq;
 import com.example.back.Domain.Dto.alarm.retDto;
+import com.example.back.Domain.Dto.crossDto.crossDto;
 import com.example.back.Domain.Dto.crosswalkk.childCross;
 import com.example.back.Domain.Dto.crosswalkk.cross;
 import com.example.back.Domain.Dto.crosswalkk.respCross;
@@ -78,9 +79,9 @@ public class userController {
     }
 
     @PostMapping("/user/login/cross")
-    public respCross testLoc3(@RequestParam boolean idx){
-        log.info("test2"+idx+"!!!!!!!!!!!!!!!!!!!!!!!");
-        if(idx) throw new RuntimeException("It is allow to child");
+    public respCross testLoc3(@RequestBody crossDto crossDto){
+        log.info("test2"+crossDto.isIdx()+"!!!!!!!!!!!!!!!!!!!!!!!");
+        if(crossDto.isIdx()) throw new RuntimeException("It is allow to child");
         List<cross> crosses = userService.reqForCross();
         respCross respCross = new respCross();
         respCross.setCrosses(crosses);
@@ -89,9 +90,9 @@ public class userController {
     }
 
     @PostMapping("/user/login/cross/cond")
-    public respCross testLoc4(@RequestParam boolean idx){
-        log.info("test2"+idx+"!!!!!!!!!!!!!!!!!!!!!!!");
-        if(idx) throw new RuntimeException("It is allow to child");
+    public respCross testLoc4(@RequestBody crossDto crossDto){
+        log.info("test2"+crossDto.isIdx()+"!!!!!!!!!!!!!!!!!!!!!!!");
+        if(crossDto.isIdx()) throw new RuntimeException("It is allow to child");
         List<cross> crosses = userService.reqForCrossCond();
         respCross respCross = new respCross();
         respCross.setCrosses(crosses);
