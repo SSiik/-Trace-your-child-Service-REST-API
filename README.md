@@ -1,4 +1,4 @@
-# To-Do-List
+# Trace your child Servce REST API 설계
 
 <p align="center">
   <br>
@@ -8,7 +8,8 @@
 
 ## 프로젝트 소개
 
-  ### To-do-list로 오늘 할일을 기록하고, 할일의 내부단계 스텝을 추가하고, 간단한 메모도 작성할수 있습니다.
+  ### 자녀의 위치를 확인할수 있는 앱 서비스의 REST API를 설계하였습니다.
+  ### 위치 확인 및 위험지역 안내 등의 기능
 
 
 <p align="center">
